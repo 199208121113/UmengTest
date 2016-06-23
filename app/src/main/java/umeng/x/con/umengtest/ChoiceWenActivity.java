@@ -76,7 +76,7 @@ public class ChoiceWenActivity extends Activity implements AdapterView.OnItemCli
         Map<String,String> scanType;
         String scanPath;
         Context ctx;
-
+        List<FileInfo> mInfo = new ArrayList<>();
         public LoadLocalFileTask(Context ctx,Map<String, String> scanType, String scanPath) {
             this.ctx = ctx;
             this.scanType = scanType;
@@ -85,7 +85,7 @@ public class ChoiceWenActivity extends Activity implements AdapterView.OnItemCli
 
         @Override
         protected List<FileInfo> doInBackground(String... params) {
-            return scanSDCard(new File(scanPath),scanType);
+            return scanSDCard(new File(scanPath),scanType,mInfo);
         }
 
         @Override
@@ -99,9 +99,7 @@ public class ChoiceWenActivity extends Activity implements AdapterView.OnItemCli
             mListView.setAdapter(adapter);
         }
     }
-
-    private List<FileInfo> scanSDCard(File file, Map<String,String> scanType) {
-        List<FileInfo> mInfo = new ArrayList<>();
+    private List<FileInfo> scanSDCard(File file, Map<String,String> scanType,List<FileInfo> mInfo) {
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             for (File mFile : files){
@@ -116,7 +114,7 @@ public class ChoiceWenActivity extends Activity implements AdapterView.OnItemCli
                         }
                     }
                 }else{
-                    scanSDCard(mFile,scanType);
+                    scanSDCard(mFile,scanType,mInfo);
                 }
             }
         } else if (file.isFile()) {
