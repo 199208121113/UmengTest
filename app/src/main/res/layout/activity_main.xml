@@ -5,6 +5,12 @@
     android:orientation="vertical"
     >
 
+    <TextView
+        android:id="@+id/tv_test_translation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tv_bg"/>
+
     <Button
         android:id="@+id/btn_photo"
         android:layout_width="match_parent"
